@@ -1,8 +1,27 @@
-import os
+import pandas as pd
+import glob
 
-home_dir = os.path.expanduser("~")
-git_count = sum(1 for root, dirs, files in os.walk(home_dir) if ".git" in dirs)
+files = glob.glob("*.csv")
 
-print(f"Number of Git repositories: {git_count}")
+total_count = 0  
 
+for file in files:
+    print(f"Processing {file}...") 
+    
+    try:
+        chunk_size = 10000
+        file_count = 0
+
+        for chunk in pd.read_csv(file, chunksize=chunk_size):
+
+            matches = chunk.astype(str).apply(lambda x: x.str.contains("GitHub", case=False, na=False)).any(axis=1)
+            file_count += matches.sum()
+
+        total_count += file_count 
+        print(f"{file}: {file_count} lines contain 'GitHub'") 
+
+    except Exception as e:
+        print(f"Error processing {file}: {e}")  
+
+print(f"Total lines containing 'GitHub': {total_count}")
 

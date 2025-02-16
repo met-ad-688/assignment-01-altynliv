@@ -1,7 +1,3 @@
-RANGE                                 SIZE  STATE REMOVABLE BLOCK
-0x0000000000000000-0x00000000bfffffff   3G online       yes  0-23
-0x0000000100000000-0x000000023fffffff   5G online       yes 32-71
-
-Memory block size:       128M
-Total online memory:       8G
-Total offline memory:      0B
+               total        used        free      shared  buff/cache   available
+Mem:           7.6Gi       3.7Gi       2.0Gi       2.7Mi       2.2Gi       3.9Gi
+Swap:             0B          0B          0B
